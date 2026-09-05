@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const linkGroups = [
+  {
+    title: 'IBM Z 資源',
+    links: [
+      { name: 'IBM Z 文件', url: 'https://www.ibm.com/docs/en/zos', desc: '官方 z/OS 文件' },
+      { name: 'z/OS 知識中心', url: 'https://www.ibm.com/docs/en/zos/3.1.0', desc: '最新版本文件' },
+      { name: 'RACF 安全伺服器', url: 'https://www.ibm.com/docs/en/zos/3.1.0?topic=racf-resource-access-control-facility', desc: 'RACF 文件' },
+      { name: 'IBM Z Redbooks', url: 'https://www.redbooks.ibm.com/', desc: '技術深度指南' },
+    ],
+  },
+  {
+    title: 'LLM / 機器學習',
+    links: [
+      { name: 'Hugging Face', url: 'https://huggingface.co/', desc: '模型與資料集' },
+      { name: 'llama.cpp', url: 'https://github.com/ggerganov/llama.cpp', desc: '高效能 LLM 推論' },
+      { name: 'GGML 量化', url: 'https://github.com/ggerganov/ggml', desc: '張量庫' },
+      { name: 'IBM Research AI', url: 'https://research.ibm.com/artificial-intelligence', desc: 'IBM AI 研究' },
+    ],
+  },
+  {
+    title: '京都',
+    links: [
+      { name: '鴨川', url: 'https://ja.wikipedia.org/wiki/%E9%B4%A8%E5%B7%9D', desc: '京都的河川' },
+      { name: '出町柳', url: 'https://ja.wikipedia.org/wiki/%E5%87%BA%E7%94%BA%E6%9F%B3', desc: '鴨川旁的社區' },
+      { name: '宇治茶', url: 'https://ja.wikipedia.org/wiki/%E5%AE%87%E6%B2%BB%E8%8C%B6', desc: '京都的茶' },
+    ],
+  },
+  {
+    title: '靈感來源',
+    links: [
+      { name: 'caffeine.ink', url: 'https://caffeine.ink/', desc: '個人網站設計靈感' },
+      { name: 'jvns.ca', url: 'https://jvns.ca/', desc: 'Julia Evans 的部落格' },
+      { name: 'sive.rs', url: 'https://sive.rs/', desc: 'Derek Sivers 的寫作' },
+      { name: 'The Jargon File', url: 'http://www.catb.org/jargon/', desc: '黑客文化詞典' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="連結">
+  <h1>連結</h1>
+
+  {linkGroups.map((group) => (
+    <section class="links-section">
+      <h2>{group.title}</h2>
+      <ul class="links-list">
+        {group.links.map((link) => (
+          <li>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.name}</a>
+            <span class="link-desc">— {link.desc}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

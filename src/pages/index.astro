@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))];
+---
+
+<BaseLayout title="首頁">
+  <div class="tag-filter" id="tag-filter">
+    <button class="tag active" data-tag="all">全部</button>
+    {allTags.map((tag) => (
+      <button class="tag" data-tag={tag}>{tag}</button>
+    ))}
+  </div>
+
+  <div id="posts-list">
+    {posts.map((post) => (
+      <PostCard
+        title={post.data.title}
+        date={post.data.date}
+        excerpt={post.data.excerpt}
+        tags={post.data.tags}
+        slug={post.id}
+      />
+    ))}
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function() {
+    const filter = document.getElementById('tag-filter');
+    const posts = document.querySelectorAll('.post-card');
+
+    filter.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tag');
+      if (!btn) return;
+
+      // Update active state
+      filter.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+
+      const tag = btn.dataset.tag;
+
+      posts.forEach(post => {
+        if (tag === 'all') {
+          post.style.display = '';
+          return;
+        }
+        const postTags = post.querySelectorAll('[data-tag]');
+        const hasTag = Array.from(postTags).some(t => t.dataset.tag === tag);
+        post.style.display = hasTag ? '' : 'none';
+      });
+    });
+  })();
+</script>

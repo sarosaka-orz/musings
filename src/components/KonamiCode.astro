@@ -1,0 +1,34 @@
+---
+---
+
+<div class="konami-overlay" id="konami-overlay">
+  <div class="konami-content">
+    <h2>↑ ↑ ↓ ↓ ← → ← → B A</h2>
+    <p>你找到了秘密。但我還沒有想好在這裏放什麼……</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">點擊任意處關閉</p>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    const sequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let index = 0;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === sequence[index]) {
+        index++;
+        if (index === sequence.length) {
+          const overlay = document.getElementById('konami-overlay');
+          overlay.classList.add('active');
+          index = 0;
+        }
+      } else {
+        index = 0;
+      }
+    });
+
+    document.getElementById('konami-overlay').addEventListener('click', () => {
+      document.getElementById('konami-overlay').classList.remove('active');
+    });
+  })();
+</script>

@@ -1,0 +1,64 @@
+---
+const base = import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href={base} class="nav-brand">楓見隨想錄</a>
+
+    <button class="nav-toggle" aria-label="選單" id="nav-toggle">&#9776;</button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href={`${base}/`} class={currentPath === `${base}/` || currentPath === base ? 'active' : ''}>首頁</a></li>
+      <li><a href={`${base}/about`} class={currentPath === `${base}/about/` ? 'active' : ''}>關於</a></li>
+      <li><a href={`${base}/links`} class={currentPath === `${base}/links/` ? 'active' : ''}>連結</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <span class="nav-clock" id="nav-clock"></span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="切換主題">
+        <span id="theme-icon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const el = document.getElementById('nav-clock');
+    if (el) {
+      el.textContent = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+
+  function updateIcon() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    icon.textContent = theme === 'dark' ? '☄' : '☾';
+  }
+  updateIcon();
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateIcon();
+  });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+</script>

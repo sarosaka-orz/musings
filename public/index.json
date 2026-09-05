@@ -1,0 +1,31 @@
+[
+  {
+    "slug": "fcitx5-ii-manual",
+    "title": "Fcitx5 + ii 使用手冊",
+    "date": "2026.06.23",
+    "excerpt": "關於在 Linux 上使用 Fcitx5 + ii 的一些修復經驗。",
+    "tags": ["科技","Linux","問題"]
+  },
+  {
+    "slug": "ubuntu-hater",
+    "title": "關於一些 Ubuntu by Canonical 的事情。",
+    "date": "2026.07.02",
+    "excerpt": "只有在今天正式用過 Ubuntu 做開發的，才會知道爲什麼。",
+    "tags": ["科技","Linux"]
+  },
+  {
+    "slug": "zephyrus-exp",
+    "title": "購入 Zephyrus 之後的體驗",
+    "date": "2026.07.19",
+    "excerpt": "新筆電和新麻煩。",
+    "tags": ["科技","Linux"]
+  },
+  {
+    "slug": "hyprland-fix",
+    "title": "Fixing Hyprland Atomic Modesetting",
+    "date": "2026.08.31",
+    "excerpt": "A general manual about fixing Hyprland atomic modesetting w/ Strix Point.",
+    "tags": ["Linux"]
+  }
+
+]

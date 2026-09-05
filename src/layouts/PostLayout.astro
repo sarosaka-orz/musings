@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+}
+
+const { title, date, tags } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).replace(/\//g, '.');
+---
+
+<BaseLayout title={title}>
+  <article>
+    <div class="post-header">
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <span class="post-meta-date">{formattedDate}</span>
+        <div class="post-card-tags">
+          {tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

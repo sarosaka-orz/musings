@@ -1,0 +1,15 @@
+---
+const year = new Date().getFullYear();
+const today = new Date().toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).replace(/\//g, '.');
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>&copy; {year} 楓見さろ坂</span>
+    <span>{today}</span>
+  </div>
+</footer>
